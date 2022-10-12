@@ -1,0 +1,137 @@
+{% extends "layout.html" %}
+{% block content %}
+<article class="media content-section">
+    <div class="media-body">
+        <h1><a class="article-title">{{ course.title }} : {{ course.totalgrade }}</a></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Credit</th>
+                    <th>Total</th>
+                    <th>Grade</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in course.assignments %}
+                <tr>
+                    <td>{{ assignment.title }}</td>
+                    <td>{{ assignment.date }}</td>
+                    <td>{{ assignment.credit }}</td>
+                    <td>{{ assignment.total }}</td>
+                    <td>{{ assignment.percent }}</td>
+                    <td>{{ assignment.type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Points</th>
+                    <th>Total</th>
+                    <th>Percent</th>
+                    <th>Weight</th>
+                    <th>Credit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grade in course.grade_agg %}
+                <tr>
+                    <td>{{ grade.type }}</td>
+                    <td>{{ grade.credit }}</td>
+                    <td>{{ grade.total }}</td>
+                    <td>{{ grade.percent }}</td>
+                    <td>{{ grade.weight }}</td>
+                    <td>{{ grade.actual }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    </article>
+{% endblock content %}
+{% block sidebar %}
+<div class="content-section">
+    <h3>Extra Grade Tools</h3>
+    <form method="POST" action="">
+        {{ add_form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Add Grade</legend>
+            <div classs="form-group">
+                {{ add_form.grade.label(class="form-control-label") }}
+                {% if add_form.grade.errors %}
+                {{ add_form.grade(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in add_form.grade.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ add_form.grade(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ add_form.category.label(class="form-control-label") }}
+                {% if add_form.category.errors %}
+                {{ add_form.category(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in add_form.category.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ add_form.category(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ add_form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+<div class="content-section">
+    <h3>Extra Grade Tools</h3>
+    <form method="POST" action="">
+        {{ goal_form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Grade Goal</legend>
+            <div classs="form-group">
+                {{ goal_form.goal.label(class="form-control-label") }}
+                {% if goal_form.goal.errors %}
+                {{ goal_form.goal(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in goal_form.goal.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ goal_form.goal(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ goal_form.category.label(class="form-control-label") }}
+                {% if goal_form.category.errors %}
+                {{ goal_form.category(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in goal_form.category.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ goal_form.category(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ goal_form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+{% endblock sidebar%}

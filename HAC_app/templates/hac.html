@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Class Averages</h1>
+<p>Click on a Class Header for more information</p>
+{% for class in info %}
+    <article class="media content-section">
+    <div class="media-body">
+        <h1><a class="article-title" href="{{ url_for('user.specific_course', course=loop.index0) }}">{{ class.title }} : {{ class.totalgrade }}</a></h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Grade</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for assignment in class.assignments %}
+                <tr>
+                    <td>{{ assignment.title }}</td>
+                    <td>{{ assignment.date }}</td>
+                    <td>{{ assignment.percent }}</td>
+                    <td>{{ assignment.type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Percent</th>
+                    <th>Weight</th>
+                    <th>Credit</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for grade in class.grade_agg %}
+                <tr>
+                    <td>{{ grade.type }}</td>
+                    <td>{{ grade.percent }}</td>
+                    <td>{{ grade.weight }}</td>
+                    <td>{{ grade.actual }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    </article>
+{% endfor %}
+{% endblock content %}

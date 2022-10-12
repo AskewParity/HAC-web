@@ -1,0 +1,96 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Log In</legend>
+            <div class="form-group">
+                {{ form.username.label(class="form-control-label") }}
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label(class="form-control-label") }}
+                {% if form.password.errors %}
+                {{ form.password(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.password(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+
+{% endblock content %}
+{% block sidebar %}
+<div class="content-section">
+    <h3>Extra Grade Tools</h3>
+    <form method="POST" action="">
+        {{ final_calc.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Final Grade Calculator</legend>
+            <div classs="form-group">
+                {{ final_calc.current_grade.label(class="form-control-label") }}
+                {% if final_calc.current_grade.errors %}
+                {{ final_calc.current_grade(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in final_calc.current_grade.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ final_calc.current_grade(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ final_calc.desired_grade.label(class="form-control-label") }}
+                {% if final_calc.desired_grade.errors %}
+                {{ final_calc.desired_grade(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in final_calc.desired_grade.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ final_calc.desired_grade(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ final_calc.weight.label(class="form-control-label") }}
+                {% if final_calc.weight.errors %}
+                {{ final_calc.weight(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in final_calc.weight.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ final_calc.weight(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ final_calc.submit(class="btn btn-outline-info") }}
+        </div>
+
+    </form>
+</div>
+{% endblock sidebar%}
